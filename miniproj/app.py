@@ -266,8 +266,19 @@ def view_report(report_id):
             conn.execute('UPDATE reports SET ai_explanation = ? WHERE id = ?', (explanation, report_id))
             conn.commit()
     
-    conn.close()
-    return render_template('view_report.html', report=report, explanation=explanation)
+  conn.close()
+return render_template('view_report.html', report=report, explanation=explanation)
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+
+# ===== HOME ROUTE =====
+@app.route("/")
+def home():
+    return redirect("/login")
+
+
+# ===== RUN APP =====
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+ 
